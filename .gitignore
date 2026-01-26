@@ -9,3 +9,6 @@
 
 # Logs
 *.log
+
+lib/
+*.jar

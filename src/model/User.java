@@ -7,6 +7,11 @@ public class User
     private String email;    // User's email address
     private String password; //Password for user authentication
 
+    public User()
+    {
+        
+    }
+
     public User(int id, String name , String email , String password)
     {
         this.id = id;

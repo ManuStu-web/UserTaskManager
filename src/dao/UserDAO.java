@@ -7,7 +7,8 @@ public class UserDAO
     public boolean createUser(User user)
     {
         String sql="INSERT INTO users(name,email,password) VALUES(?,?,?)";
-        try(Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql))
+        Connection con = DBConnection.getConnection(); 
+        try(PreparedStatement ps = con.prepareStatement(sql))
         {
           ps.setString(1, user.getName());
           ps.setString(2, user.getEmail());
@@ -19,7 +20,8 @@ public class UserDAO
         catch(SQLException e)
         {
            System.out.println("User creation failed");
-           e.printStackTrace();
+        //    e.printStackTrace();
+        System.out.println("Reason: " + e.getMessage());
         }
         return false;
     }
@@ -27,8 +29,8 @@ public class UserDAO
     public User getUserByEmail(String email)
     {
         String sql="SELECT * FROM users WHERE email = ?";
-
-        try(Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql))
+        Connection con = DBConnection.getConnection(); 
+        try(PreparedStatement ps = con.prepareStatement(sql))
         {
             ps.setString(1, email);
 
@@ -41,17 +43,18 @@ public class UserDAO
         } catch(SQLException e)
         {
             System.out.println("!! Login Failed !!");
-            e.printStackTrace();
+            // e.printStackTrace();
+            System.out.println("Reason: " + e.getMessage());
         }
 
         return null;
     }
 
-    public User loginUser(String email,String password)
+    public static User loginUser(String email,String password)
     {
         String sql="SELECT * FROM users WHERE email=? AND password=?";
-
-        try(Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql))
+        Connection con = DBConnection.getConnection(); 
+        try(PreparedStatement ps = con.prepareStatement(sql))
         {
             ps.setString(1,email);
             ps.setString(2,password);
@@ -66,7 +69,8 @@ public class UserDAO
         } catch(SQLException e)
         {
             System.out.println("!! Login Failed !!");
-            e.printStackTrace();
+            // e.printStackTrace();
+            System.out.println("Reason: " + e.getMessage());
         }
 
         return null;
@@ -75,8 +79,8 @@ public class UserDAO
     public User getUserById(int id)
     {
         String sql = "SELECT * FROM users WHERE id = ?";
-
-        try(Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql))
+        Connection con = DBConnection.getConnection(); 
+        try(PreparedStatement ps = con.prepareStatement(sql))
         {
             ps.setInt(1,id);
 
@@ -88,13 +92,13 @@ public class UserDAO
             }
         } catch(SQLException e) {
             System.out.println("!! Login By ID Failed !!");
-            e.printStackTrace();
+            System.out.println("Reason: " + e.getMessage());
         }
 
         return null;
     }
 
-    private User extractUser(ResultSet rs) throws SQLException {
+    private static User extractUser(ResultSet rs) throws SQLException {
         User user = new User();
 
         user.setId(rs.getInt("id"));

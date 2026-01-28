@@ -27,7 +27,7 @@ public class DBConnection
             catch(SQLException e)
             {
                 System.out.println("DATABASE CONNECTION FAILED!!");
-                e.printStackTrace();
+                // e.printStackTrace();
             }
          }
 

@@ -2,19 +2,18 @@ package model;
 public class User
 {
     
-    private int id;         //Unique identifier for the user
+    private int id;          //Unique identifier for the user
     private String name;     // User's full name
     private String email;    // User's email address
     private String password; //Password for user authentication
 
     public User()
     {
-        
+
     }
 
-    public User(int id, String name , String email , String password)
+    public User(String name , String email , String password)
     {
-        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;

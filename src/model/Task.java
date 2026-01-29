@@ -7,6 +7,11 @@ public class Task
     private String status;
     private int userId;
 
+    public Task()
+    {
+        
+    }
+
     public Task(int id,String title , String description , String status , int userId)
     {
         this.id=id;

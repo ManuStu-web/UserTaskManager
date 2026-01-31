@@ -12,9 +12,8 @@ public class Task
         
     }
 
-    public Task(int id,String title , String description , String status , int userId)
+    public Task(String title , String description , String status , int userId)
     {
-        this.id=id;
         this.title=title;
         this.description=description;
         this.status=status;
@@ -22,7 +21,7 @@ public class Task
     }
 
     //Getters
-    public int gerId()
+    public int getId()
     {
         return id;
     }

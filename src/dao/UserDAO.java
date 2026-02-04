@@ -2,6 +2,7 @@ package dao;
 import model.User;
 import util.DBConnection;
 import java.sql.*;
+import util.PasswordUtil;
 public class UserDAO 
 {
     public boolean createUser(User user)
@@ -12,7 +13,7 @@ public class UserDAO
         {
           ps.setString(1, user.getName());
           ps.setString(2, user.getEmail());
-          ps.setString(3, user.getPassword());
+          ps.setString(3, PasswordUtil.hashPassword(user.getPassword()));
 
           return ps.executeUpdate()>0;
 
@@ -52,20 +53,22 @@ public class UserDAO
 
     public static User loginUser(String email,String password)
     {
-        String sql="SELECT * FROM users WHERE email=? AND password=?";
+        String sql="SELECT * FROM users WHERE email=?";
         Connection con = DBConnection.getConnection(); 
         try(PreparedStatement ps = con.prepareStatement(sql))
         {
             ps.setString(1,email);
-            ps.setString(2,password);
+            // ps.setString(2,password);
             
             ResultSet rs =ps.executeQuery();
 
-            if(rs.next())
-            {
+            if (rs.next()) {
+            String hashedPassword = rs.getString("password");
+
+            if (PasswordUtil.checkPassword(password, hashedPassword)) {
                 return extractUser(rs);
             }
-
+        }
         } catch(SQLException e)
         {
             System.out.println("!! Login Failed !!");

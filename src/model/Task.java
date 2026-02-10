@@ -1,4 +1,5 @@
 package model;
+import java.time.LocalDate;
 public class Task
 {
     private int id;
@@ -6,18 +7,22 @@ public class Task
     private String description;
     private String status;
     private int userId;
+    private LocalDate dueDate;
+    private String category;
 
     public Task()
     {
         
     }
 
-    public Task(String title , String description , String status , int userId)
+    public Task(String title , String description , String status , int userId, LocalDate dueDate, String category)
     {
         this.title=title;
         this.description=description;
         this.status=status;
         this.userId=userId;
+        this.dueDate=dueDate;
+        this.category=category;
     }
 
     //Getters
@@ -41,6 +46,14 @@ public class Task
     {
         return userId;
     }
+    public LocalDate getDueDate()
+    {
+        return dueDate;
+    }
+    public String getCategory()
+    {
+        return category;
+    }
 
     //Setters
     public void setId(int id)
@@ -62,5 +75,17 @@ public class Task
     public void setUserId(int userId)
     {
         this.userId = userId;
+    }
+    public void setCategory(String category)
+    {
+        this.category=category;
+    }
+    public void setDueDate(LocalDate dueDate)
+    {
+        this.dueDate=dueDate;
+    }
+    public boolean isOverDue()
+    {
+        return status.equalsIgnoreCase("pending") && dueDate.isBefore(LocalDate.now());
     }
 }

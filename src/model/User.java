@@ -2,10 +2,10 @@ package model;
 public class User
 {
     
-    private int id;          //Unique identifier for the user
-    private String name;     // User's full name
-    private String email;    // User's email address
-    private String password; //Password for user authentication
+    private int id;          
+    private String name;     
+    private String email;    
+    private String password; 
 
     public User()
     {
@@ -19,7 +19,6 @@ public class User
         this.password = password;
     }
 
-    //Private Data Members so create Getters and Setters (This makes data members safe and secure)
 
     //Getters
     public int getId()
